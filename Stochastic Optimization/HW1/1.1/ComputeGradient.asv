@@ -1,0 +1,19 @@
+% This function should return the gradient of f_p = f + penalty.
+% You may hard-code the gradient required for this specific problem.
+
+function gradF = ComputeGradient(x, mu)
+    x1 = x(1);
+    x2 = x(2);
+    
+    grad_f = [2*(x1 - 1); 4*(x2 - 2)];
+    
+    g = x1^2 + x2^2 - 1;
+    
+    if g > 0
+        grad_penalty = 4 * mu * g * [x1; x2];
+    else
+        grad_penalty = [0; 0];
+    end
+    
+    gradF = grad_f + grad_penalty;
+end

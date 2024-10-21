@@ -1,0 +1,18 @@
+function [F_b, T_b] = GetFoundationForce(M, g, P_p, T_b, T_max, T_amb, C_h, tau, dt)
+    
+    F_b = P_p * M * g / 20;
+
+    if T_b >= (T_max - 100)
+        F_b = F_b * exp(-(T_b - (T_max - 100)) / 100);
+    end
+
+    if P_p < 0.01
+    T_b = T_b - ((T_b - T_amb) / tau * dt;  % Cooling term
+else
+    T_b = T_b + C_h * P_p * dt;  % Heating term
+end
+
+    if T_b < T_amb
+        T_b = T_amb;
+    end
+end
